@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLoaderData, useParams } from 'react-router';
+import { addToStoreDB } from '../../../Uilitys/AddToDB';
 
 const BookDetails = () => {
     const { id } = useParams();
@@ -9,6 +10,9 @@ const BookDetails = () => {
     const singleBook = data.find(book => book.bookId === bookId)
     // console.log(singleBook);
     const { tags, category, rating, image, author, totalPages, bookName, review, yearOfPublishing, publisher } = singleBook || {};
+    const handleRead = (id)=>{
+      addToStoreDB(id)
+    }
 
 
     return (
@@ -35,7 +39,7 @@ const BookDetails = () => {
                         <h2 className='text-xl font-normul'> <span className='text-xl font-normul text-gray-400 mr-30'>Year of Publishing: </span>{yearOfPublishing}</h2>
                         <h2 className='text-xl font-normul'><span className='text-xl font-normul text-gray-400 mr-60'>Rating: </span>{rating}</h2>
                     </div>
-                    <button className="btn bg-[#FFFFFF] border-red-300 m-2">Read</button>
+                    <button onClick={()=>handleRead(id)} className="btn bg-[#FFFFFF] border-red-300 m-2">Read</button>
                     <button className="btn bg-[#50B1C9] m-2">Wishlist</button>
                 </div>
             </div>
